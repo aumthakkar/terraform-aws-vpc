@@ -1,10 +1,10 @@
-terraform { 
-  cloud { 
-    
-    organization = "MTCITF-NOV24" 
+terraform {
+  cloud {
 
-    workspaces { 
-      name = "pht-dev" 
-    } 
-  } 
+    organization = "MTCITF-NOV24"
+
+    workspaces {
+      name = "pht-dev"
+    }
+  }
 }
