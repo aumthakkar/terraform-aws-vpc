@@ -67,7 +67,7 @@ resource "aws_subnet" "pht_private_subnet" {
   }
 }
 
-resource "aws_security_group" "pht_public_sg" {
+resource "aws_security_group" "pht_sg" {
   for_each = var.security_groups
 
   name        = each.value.name
