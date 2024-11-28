@@ -1,3 +1,5 @@
+# --- database/main.tf ---
+
 resource "aws_db_instance" "pht_db" {
   allocated_storage = var.db_storage
 
