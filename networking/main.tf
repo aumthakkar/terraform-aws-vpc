@@ -1,3 +1,5 @@
+# --- networking/main.tf ---
+
 
 resource "random_integer" "randint" {
   min = 1
@@ -28,7 +30,7 @@ resource "aws_vpc" "pht_vpc" {
   }
 }
 
-resource "aws_subnet" "pht_public_subnet" {
+resource "aws_subnet" "pht_public_subnets" {
   count = var.public_sn_count
 
   vpc_id = aws_vpc.pht_vpc.id
@@ -48,11 +50,11 @@ resource "aws_route_table_association" "pht_public_rt_association" {
   count = var.public_sn_count
 
   route_table_id = aws_route_table.pht_public_route_table.id
-  subnet_id      = aws_subnet.pht_public_subnet.*.id[count.index]
+  subnet_id      = aws_subnet.pht_public_subnets.*.id[count.index]
 
 }
 
-resource "aws_subnet" "pht_private_subnet" {
+resource "aws_subnet" "pht_private_subnets" {
   count = var.private_sn_count
 
   vpc_id = aws_vpc.pht_vpc.id
@@ -136,7 +138,7 @@ resource "aws_db_subnet_group" "pht_db_subnet_group" {
   name        = "pht-rds-db-subnet-group"
   description = "subnet-group for the rds instance"
 
-  subnet_ids = aws_subnet.pht_private_subnet.*.id
+  subnet_ids = aws_subnet.pht_private_subnets.*.id
 
   tags = {
     Name = "pht-rds-db-subnet-group"
